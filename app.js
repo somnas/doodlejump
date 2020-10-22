@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
         grid.appendChild(doodler);
         doodler.classList.add("doodler");
         doodler.style.left = doodlerLeftSpace + "px";
-        doodler.style.bootom = doodlerBottomSpace + "px";   
+        doodler.style.bottom = doodlerBottomSpace + "px"; 
+        console.log(doodler);  
     }
 
     class Platform {
@@ -38,11 +39,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }        
     }
      
+    function movePlatforms() {
+        if(doodlerBottomSpace > 200) {
+            platforms.forEach(platform => {
+                platform.bottom -= 4;
+                let visual = platform.visual;
+                visual.style.bottom = platform.bottom + "px";
+            })
+        }
+    }
     
     function start() {
         if (!isGameOver) {
             createDoodler();
             createPlatforms();
+            setInterval(movePlatforms, 30);
         }
     }
     //attach to button
